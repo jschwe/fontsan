@@ -153,34 +153,34 @@ set(LZ4_SOURCES
 include_directories(
   fake-zlib
   ots/include
-  ots/third_party/lz4/lib
-  ots/third_party/brotli/c/dec
-  ots/third_party/brotli/c/include
-  ots/third_party/woff2/include
-  ots/third_party/woff2/src
+#  ots/third_party/lz4/lib
+#  ots/third_party/brotli/c/dec
+#  ots/third_party/brotli/c/include
+#  ots/third_party/woff2/include
+#  ots/third_party/woff2/src
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fPIC")
 
-add_library(ots STATIC ${OTS_SOURCES})
-add_library(brotli STATIC ${BROTLI_SOURCES})
-add_library(woff2 STATIC ${WOFF2_SOURCES})
+#add_library(ots STATIC ${OTS_SOURCES})
+#add_library(brotli STATIC ${BROTLI_SOURCES})
+#add_library(woff2 STATIC ${WOFF2_SOURCES})
 add_library(ots_glue STATIC ${OTS_GLUE_SOURCES})
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
-    target_sources(ots PRIVATE "${LZ4_SOURCES}")
-    target_include_directories(ots PRIVATE ots/third_party/lz4/lib/)
-endif()
+#if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+#    target_sources(ots PRIVATE "${LZ4_SOURCES}")
+#    target_include_directories(ots PRIVATE ots/third_party/lz4/lib/)
+#endif()
 
-SET_TARGET_PROPERTIES(woff2 PROPERTIES
-  COMPILE_FLAGS "-std=c++11"
-)
+#SET_TARGET_PROPERTIES(woff2 PROPERTIES
+#  COMPILE_FLAGS "-std=c++11"
+#)
+#
+#SET_TARGET_PROPERTIES(ots PROPERTIES
+#  COMPILE_FLAGS "-std=c++11"
+#)
 
-SET_TARGET_PROPERTIES(ots PROPERTIES
-  COMPILE_FLAGS "-std=c++11"
-)
-
-install(TARGETS ots ARCHIVE DESTINATION lib)
-install(TARGETS brotli ARCHIVE DESTINATION lib)
-install(TARGETS woff2 ARCHIVE DESTINATION lib)
+#install(TARGETS ots ARCHIVE DESTINATION lib)
+#install(TARGETS brotli ARCHIVE DESTINATION lib)
+#install(TARGETS woff2 ARCHIVE DESTINATION lib)
 install(TARGETS ots_glue ARCHIVE DESTINATION lib)
